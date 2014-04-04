@@ -11,29 +11,51 @@
 			'question-2': 'kokiri'
 		},
 		CURRENT_QUESTION_INDEX = 0,
-		MAX_QUESTION_INDEX = 2;
+		MAX_QUESTION_INDEX = $('.question').length - 1;
 
+	/**
+	 * Disable inputs and buttons for a given `parent`.
+	 *
+	 * @param parent
+	 */
+	var disableInputs = function(parent) {
+		$(parent + ' input, ' + parent + ' button').prop('disabled', true);
+	};
+
+	/**
+	 * Shows an alert or success message.
+	 *
+	 * @param message
+	 * @param status
+	 */
 	var showMessage = function(message, status) {
 		$('.alert').hide();
 		if (status === 'success') {
 			$('#code-success').text(message).show();
+			disableInputs('.jumbotron');
 			$('#questionnaire').delay(1000).fadeIn(400);
 		} else {
 			$('#code-error').text(message).show();
 		}
-		$('.alert').delay(1000).fadeOut(400);
+		$('.alert').delay(2000).fadeOut(400);
 	};
 
+	/**
+	 * If there are questions left to answer, shows the next question.
+	 */
 	var showNextQuestion = function() {
 		if (CURRENT_QUESTION_INDEX < MAX_QUESTION_INDEX) {
 			CURRENT_QUESTION_INDEX = CURRENT_QUESTION_INDEX + 1;
 			$('.question-' + CURRENT_QUESTION_INDEX).fadeIn(400);
 		} else {
-			$('input, button').prop('disabled', true);
+			disableInputs('');
 			$('#price').fadeIn();
 		}
 	};
 
+	/**
+	 * Initializes the current question counter to 0 and start the questionnaire.
+	 */
 	var resetQuestionnaire = function() {
 		CURRENT_QUESTION_INDEX = 0;
 		$('.question').hide();
@@ -41,7 +63,9 @@
 		$('.question-0').fadeIn(400);
 	};
 
-	// First stage, listen for a code.
+	/**
+	 * Listen clicks on `Redeem a code`.
+	 */
 	$('#redeem-code').click(function() {
 		var inputId = $(this).data('input-id'),
 			code = $('#' + inputId).val();
@@ -55,16 +79,13 @@
 		}
 	});
 
-	// Second stage, questionnaire
+	/**
+	 * Listen clicks on `continue` questionnaire buttons.
+	 */
 	$('#questionnaire .questionnaire-btn').click(function() {
 		var questionId = $(this).data('question-id'),
 			checkedValue = $('input[name=' + questionId + ']:checked').val();
 
-//		debugger;
-		console.log(checkedValue);
-		console.log(questionId);
-		console.log(QUESTIONNAIRE_ANSWERS[questionId]);
-		console.log(QUESTIONNAIRE_ANSWERS[questionId] === checkedValue);
 		if (QUESTIONNAIRE_ANSWERS[questionId] === checkedValue) {
 			showNextQuestion();
 		} else {
