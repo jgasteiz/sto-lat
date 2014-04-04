@@ -1,0 +1,38 @@
+#code-input {
+	font-size: 1.2em;
+	height: auto;
+	max-width: 260px;
+	margin: 20px auto;
+	text-align: center;
+}
+
+.code-messages-wrapper {
+	height: 60px;
+	position: relative;
+}
+
+.code-messages-wrapper > .alert {
+	line-height: 1em;
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+}
+
+#questionnaire ol {
+	margin: 20px 0;
+}
+
+.question {
+	margin: 20px 0;
+}
+
+.question ul {
+	list-style: none;
+	margin: 10px 0;
+	padding: 0;
+}
+
+#price {
+	text-align: center;
+}

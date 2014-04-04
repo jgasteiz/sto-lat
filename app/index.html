@@ -1,0 +1,138 @@
+<!doctype html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+	<head>
+		<meta charset="utf-8">
+		<title>sto lat</title>
+		<meta name="description" content="">
+		<meta name="viewport" content="width=device-width">
+		<link rel="shortcut icon" href="/favicon.ico">
+		<!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+		<!-- build:css styles/vendor.css -->
+		<!-- bower:css -->
+		<link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+		<!-- endbower -->
+		<!-- endbuild -->
+		<!-- build:css(.tmp) styles/main.css -->
+		<link rel="stylesheet" href="styles/main.css">
+		<link rel="stylesheet" href="styles/sto-lat.css">
+		<!-- endbuild -->
+	</head>
+	<body>
+		<!--[if lt IE 10]>
+			<p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+		<![endif]-->
+
+
+		<div class="container">
+
+			<div class="jumbotron">
+				<h1>Sto lat</h1>
+				<p class="lead">Do you have a code to redeem?</p>
+				<p>
+					<input id="code-input" type="text" class="form-control">
+					<button id="redeem-code" class="btn btn-lg btn-success" data-input-id="code-input">Splendid! Redeem your code <span class="glyphicon glyphicon-ok"></span></button>
+				</p>
+			</div>
+
+			<div class="code-messages-wrapper">
+				<span id="code-error" class="alert alert-danger" style="display: none;"></span>
+				<span id="code-success" class="alert alert-success" style="display: none;"></span>
+			</div>
+
+			<div id="questionnaire" style="display: none;">
+				<p>To get your present, first fill in this questionnaire correctly:</p>
+				<ol>
+					<li class="question question-0">
+						<p><strong>What's the name of the main evil character in the last three Star Wars episodes?</strong></p>
+						<ul>
+							<li>
+								<label for="r01">
+									<input id="r01" type="radio" name="question-0" value="mario"/> Super Mario
+								</label>
+							</li>
+							<li>
+								<label for="r02">
+									<input id="r02" type="radio" name="question-0" value="saruman"/> Saruman
+								</label>
+							</li>
+							<li>
+								<label for="r03">
+									<input id="r03" type="radio" name="question-0" value="darth-vader"/> Darth Vader
+								</label>
+							</li>
+						</ul>
+						<button class="btn btn-primary questionnaire-btn" data-question-id="question-0">Continue</button>
+					</li>
+					<li class="question question-1" style="display: none;">
+						<p><strong>How is the only way of killing a Zombie in The Walking Dead?</strong></p>
+						<ul>
+							<li>
+								<label for="r11">
+									<input id="r11" type="radio" name="question-1" value="flowers"/> Throwing flowers to them
+								</label>
+							</li>
+							<li>
+								<label for="r12">
+									<input id="r12" type="radio" name="question-1" value="shouting"/> Shouting at them
+								</label>
+							</li>
+							<li>
+								<label for="r13">
+									<input id="r13" type="radio" name="question-1" value="shot-in-the-head"/> Shooting them in the head
+								</label>
+							</li>
+						</ul>
+						<button class="btn btn-primary questionnaire-btn" data-question-id="question-1">Continue</button>
+					</li>
+					<li class="question question-2" style="display: none;">
+						<p><strong>In the classic Nintendo 64 game, The Legend of Zelda: Ocarina of Time, what's the hero's hometown name?</strong></p>
+						<ul>
+							<li>
+								<label for="r21">
+									<input id="r21" type="radio" name="question-2" value="przeworsk"/> Przeworsk
+								</label>
+							</li>
+							<li>
+								<label for="r22">
+									<input id="r22" type="radio" name="question-2" value="kokiri"/> Kokiri
+								</label>
+							</li>
+							<li>
+								<label for="r23">
+									<input id="r23" type="radio" name="question-2" value="hylia"/> Hylia
+								</label>
+							</li>
+						</ul>
+						<button class="btn btn-primary questionnaire-btn" data-question-id="question-2">Finish</button>
+					</li>
+				</ol>
+			</div>
+			
+			<div id="price" class="well" style="display: none;">
+				<h2>Congratulations! you reached the end of your adventure. Here's your price:</h2>
+				<p><img src="images/mirror.jpg" alt=""/></p>
+				<h3><a target="_blank" href="http://www.ikea.com/gb/en/catalog/products/30217499/#/20243837">See it on Ikea's website</a></h3>
+			</div>
+
+			<div class="footer">
+				<p><span class="glyphicon glyphicon-heart"></span> from Javi</p>
+			</div>
+
+		</div>
+
+
+		<!-- build:js scripts/vendor.js -->
+		<!-- bower:js -->
+		<script src="bower_components/jquery/dist/jquery.js"></script>
+		<!-- endbower -->
+		<!-- endbuild -->
+
+
+		<!-- build:js({app,.tmp}) scripts/main.js -->
+		<script src="scripts/main.js"></script>
+		<!-- endbuild -->
+	</body>
+</html>
