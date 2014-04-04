@@ -2,6 +2,10 @@ img {
 	max-width: 100%;
 }
 
+.questionnaire-btn {
+	margin: 0 10px 10px 0;
+}
+
 #code-input {
 	font-size: 1.2em;
 	height: auto;

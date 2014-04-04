@@ -59,7 +59,7 @@
 	var resetQuestionnaire = function() {
 		CURRENT_QUESTION_INDEX = 0;
 		$('.question').hide();
-		$('input[type=radio]').prop('checked', '');
+		$('#questionnaire button').prop('disabled', '');
 		$('.question-0').fadeIn(400);
 	};
 
@@ -84,10 +84,11 @@
 	 */
 	$('#questionnaire .questionnaire-btn').click(function() {
 		var questionId = $(this).data('question-id'),
-			checkedValue = $('input[name=' + questionId + ']:checked').val();
+			clickedValue = $(this).data('value');
 
-		if (QUESTIONNAIRE_ANSWERS[questionId] === checkedValue) {
+		if (QUESTIONNAIRE_ANSWERS[questionId] === clickedValue) {
 			showNextQuestion();
+			$('.' + questionId + ' button').prop('disabled', 'disabled');
 		} else {
 			showMessage('Wrong answer, you must start all over again.');
 			resetQuestionnaire();
