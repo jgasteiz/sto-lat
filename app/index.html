@@ -1,111 +1,75 @@
 <!doctype html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
-	<head>
-		<meta charset="utf-8">
-		<title>sto lat</title>
-		<meta name="description" content="">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-		<link rel="shortcut icon" href="/favicon.ico">
-		<!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-		<!-- build:css styles/vendor.css -->
-		<!-- bower:css -->
-		<link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
-		<!-- endbower -->
-		<!-- endbuild -->
-		<!-- build:css(.tmp) styles/main.css -->
-		<link rel="stylesheet" href="styles/main.css">
-		<link rel="stylesheet" href="styles/sto-lat.css">
-		<!-- endbuild -->
-	</head>
-	<body>
-		<div class="container">
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Sto Lat</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+	<link rel="shortcut icon" href="/favicon.ico">
 
-			<div class="jumbotron">
-				<h1>Sto lat</h1>
-				<p class="lead">Do you have a code to redeem?</p>
-				<p>
-					<input id="code-input" type="text" class="form-control">
-					<button id="redeem-code" class="btn btn-success" data-input-id="code-input">Redeem your code <span class="glyphicon glyphicon-ok"></span></button>
-				</p>
-			</div>
+	<link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css"/>
+	<link rel="stylesheet" href="styles/main.css">
+	<link rel="stylesheet" href="styles/sto-lat.css">
+</head>
+<body ng-app="stoLat">
 
-			<div class="code-messages-wrapper">
-				<span id="code-error" class="alert alert-danger" style="display: none;"></span>
-				<span id="code-success" class="alert alert-success" style="display: none;"></span>
-			</div>
+	<div class="container" ng-controller="StoLatCtrl">
 
-			<div id="questionnaire" style="display: none;">
-				<p>To get your present, first fill in this questionnaire correctly:</p>
-				<ol>
-					<li class="question question-0">
-						<p><strong>What's the name of the main evil character in the original Star Wars trilogy?</strong></p>
-						<!--<ul>-->
-							<!--<li>-->
-								<!--<label for="r01">-->
-									<!--<input id="r01" type="radio" name="question-0" value="mario"/> Super Mario-->
-								<!--</label>-->
-							<!--</li>-->
-							<!--<li>-->
-								<!--<label for="r02">-->
-									<!--<input id="r02" type="radio" name="question-0" value="saruman"/> Saruman-->
-								<!--</label>-->
-							<!--</li>-->
-							<!--<li>-->
-								<!--<label for="r03">-->
-									<!--<input id="r03" type="radio" name="question-0" value="darth-vader"/> Darth Vader-->
-								<!--</label>-->
-							<!--</li>-->
-						<!--</ul>-->
-						<p>
-							<button class="btn btn-warning questionnaire-btn" data-value="mario" data-question-id="question-0">Super Mario</button>
-							<button class="btn btn-warning questionnaire-btn" data-value="saruman" data-question-id="question-0">Saruman</button>
-							<button class="btn btn-warning questionnaire-btn" data-value="darth-vader" data-question-id="question-0">Darth Vader</button>
-						</p>
-					</li>
-					<li class="question question-1" style="display: none;">
-						<p><strong>How is the only way of killing a Zombie in The Walking Dead?</strong></p>
-						<p>
-							<button class="btn btn-warning questionnaire-btn" data-value="flowers" data-question-id="question-1">Throwing flowers to them</button>
-							<button class="btn btn-warning questionnaire-btn" data-value="shouting" data-question-id="question-1">Shouting at them</button>
-							<button class="btn btn-warning questionnaire-btn" data-value="shot-in-the-head" data-question-id="question-1">Shooting them in the head</button>
-						</p>
-					</li>
-					<li class="question question-2" style="display: none;">
-						<p><strong>In the classic Nintendo 64 game, The Legend of Zelda: Ocarina of Time, what's the hero's hometown name?</strong></p>
-						<p>
-							<button class="btn btn-warning questionnaire-btn" data-value="przeworsk" data-question-id="question-2">Przeworsk</button>
-							<button class="btn btn-warning questionnaire-btn" data-value="kokiri" data-question-id="question-2">Kokiri</button>
-							<button class="btn btn-warning questionnaire-btn" data-value="hylia" data-question-id="question-2">Hylia</button>
-						</p>
-					</li>
-				</ol>
-			</div>
-			
-			<div id="price" class="well" style="display: none;">
-				<h2>Congratulations! you reached the end of your adventure. Here's your price:</h2>
-				<p><img src="images/mirror.jpg" alt=""/></p>
-				<h3><a href="http://www.ikea.com/gb/en/catalog/products/30217499/#/20243837">See it on Ikea's website</a></h3>
-			</div>
-
-			<div class="footer">
-				<p><span class="glyphicon glyphicon-heart"></span> from Javi</p>
-			</div>
-
+		<div class="jumbotron">
+			<h1>Sto lat</h1>
+			<p class="lead">Do you have a code to redeem?</p>
+			<p>
+				<input ng-disabled="codeCorrect" type="text" ng-model="code" class="form-control">
+				<button ng-disabled="codeCorrect" ng-click="checkCode()" class="btn btn-success" data-input-id="code-input">Redeem your code <span class="glyphicon glyphicon-ok"></span></button>
+			</p>
 		</div>
 
+		<div class="messages-wrapper">
+			<span class="alert alert-{{messageClass}}">{{message}}</span>
+		</div>
 
-		<!-- build:js scripts/vendor.js -->
-		<!-- bower:js -->
-		<script src="bower_components/jquery/dist/jquery.js"></script>
-		<!-- endbower -->
-		<!-- endbuild -->
+		<div ng-show="codeCorrect">
+			<p>To get your present, first fill in this questionnaire correctly:</p>
+			<ol>
+				<li ng-show="codeCorrect" class="question">
+					<p><strong>What's the name of the main evil character in the original Star Wars trilogy?</strong></p>
+					<p>
+						<button class="btn btn-warning" ng-click="checkQuestion('mario', 0)" ng-disabled="currentQuestionIndex > 0">Super Mario</button>
+						<button class="btn btn-warning" ng-click="checkQuestion('saruman', 0)" ng-disabled="currentQuestionIndex > 0">Saruman</button>
+						<button class="btn btn-warning" ng-click="checkQuestion('darth-vader', 0)" ng-disabled="currentQuestionIndex > 0">Darth Vader</button>
+					</p>
+				</li>
+				<li ng-show="currentQuestionIndex > 0" class="question">
+					<p><strong>How is the only way of killing a Zombie in The Walking Dead?</strong></p>
+					<p>
+						<button class="btn btn-warning" ng-click="checkQuestion('flowers', 1)" ng-disabled="currentQuestionIndex > 1">Throwing flowers to them</button>
+						<button class="btn btn-warning" ng-click="checkQuestion('shouting', 1)" ng-disabled="currentQuestionIndex > 1">Shouting at them</button>
+						<button class="btn btn-warning" ng-click="checkQuestion('shot-in-the-head', 1)" ng-disabled="currentQuestionIndex > 1">Shooting them in the head</button>
+					</p>
+				</li>
+				<li ng-show="currentQuestionIndex > 1" class="question">
+					<p><strong>In the classic Nintendo 64 game, The Legend of Zelda: Ocarina of Time, what's the hero's hometown name?</strong></p>
+					<p>
+						<button class="btn btn-warning" ng-click="checkQuestion('przeworsk', 2)" ng-disabled="currentQuestionIndex > 2">Przeworsk</button>
+						<button class="btn btn-warning" ng-click="checkQuestion('kokiri', 2)" ng-disabled="currentQuestionIndex > 2">Kokiri</button>
+						<button class="btn btn-warning" ng-click="checkQuestion('hylia', 2)" ng-disabled="currentQuestionIndex > 2">Hylia</button>
+					</p>
+				</li>
+			</ol>
+		</div>
 
+		<div ng-show="currentQuestionIndex > 2" class="well">
+			<h2>Congratulations! you reached the end of your adventure. Here's your price:</h2>
+			<p><img src="images/mirror.jpg" alt=""/></p>
+			<h3><a href="http://www.ikea.com/gb/en/catalog/products/30217499/#/20243837">See it on Ikea's website</a></h3>
+		</div>
 
-		<!-- build:js({app,.tmp}) scripts/main.js -->
-		<script src="scripts/main.js"></script>
-		<!-- endbuild -->
-	</body>
+		<div class="footer">
+			<p><span class="glyphicon glyphicon-heart"></span> from Javi</p>
+		</div>
+
+	</div>
+
+	<script type="text/javascript" src="bower_components/angular/angular.js"></script>
+	<script type="text/javascript" src="scripts/main.js"></script>
+</body>
 </html>

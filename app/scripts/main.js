@@ -1,97 +1,51 @@
-/* global $ */
-(function() {
-	'use strict';
+var stoLat = angular.module('stoLat', []);
 
-	var PRICES = {
-			'JaviIsTheBest': 'a price'
-		},
-		QUESTIONNAIRE_ANSWERS = {
-			'question-0': 'darth-vader',
-			'question-1': 'shot-in-the-head',
-			'question-2': 'kokiri'
-		},
-		CURRENT_QUESTION_INDEX = 0,
-		MAX_QUESTION_INDEX = $('.question').length - 1;
+stoLat.factory('Data', function() {
+	return {
+		correctCode: 'JaviIsTheBest',
+		questionnaireAnswers: {
+			0: 'darth-vader',
+			1: 'shot-in-the-head',
+			2: 'kokiri'
+		}
+	}
+});
 
-	/**
-	 * Disable inputs and buttons for a given `parent`.
-	 *
-	 * @param parent
-	 */
-	var disableInputs = function(parent) {
-		$(parent + ' input, ' + parent + ' button').prop('disabled', true);
+function StoLatCtrl($scope, $timeout, Data) {
+	$scope.data = Data;
+	$scope.codeCorrect = false;
+	$scope.showPrice = false;
+	$scope.currentQuestionIndex = 0;
+	$scope.maxQuestionIndex = 2;
+
+	var clearMessages = function() {
+		$scope.message = '';
+		$scope.messageClass = '';
 	};
 
-	/**
-	 * Shows an alert or success message.
-	 *
-	 * @param message
-	 * @param status
-	 */
 	var showMessage = function(message, status) {
-		$('.alert').hide();
-		if (status === 'success') {
-			$('#code-success').text(message).show();
-			disableInputs('.jumbotron');
-			$('#questionnaire').delay(1000).fadeIn(400);
-		} else {
-			$('#code-error').text(message).show();
-		}
-		$('.alert').delay(2000).fadeOut(400);
+		$scope.message = message;
+		$scope.messageClass = 'alert alert-' + status;
+		$timeout.cancel($scope.timer);
+		$scope.timer = $timeout(clearMessages, 3000);
 	};
 
-	/**
-	 * If there are questions left to answer, shows the next question.
-	 */
-	var showNextQuestion = function() {
-		if (CURRENT_QUESTION_INDEX < MAX_QUESTION_INDEX) {
-			CURRENT_QUESTION_INDEX = CURRENT_QUESTION_INDEX + 1;
-			$('.question-' + CURRENT_QUESTION_INDEX).fadeIn(400);
+	$scope.checkCode = function() {
+		if ($scope.code === $scope.data.correctCode) {
+			showMessage('Congratulations! You won a price.', 'success');
+			$scope.codeCorrect = true;
 		} else {
-			disableInputs('');
-			$('#price').fadeIn();
+			$scope.code = '';
+			showMessage('Congratulations! You won a pair of NOTHING.', 'danger');
 		}
 	};
 
-	/**
-	 * Initializes the current question counter to 0 and start the questionnaire.
-	 */
-	var resetQuestionnaire = function() {
-		CURRENT_QUESTION_INDEX = 0;
-		$('.question').hide();
-		$('#questionnaire button').prop('disabled', '');
-		$('.question-0').fadeIn(400);
+	$scope.checkQuestion = function(answer, questionId) {
+		if (answer === $scope.data.questionnaireAnswers[questionId]) {
+			$scope.currentQuestionIndex = $scope.currentQuestionIndex + 1;
+		} else {
+			showMessage('Wrong answer, you must start all over again.', 'danger');
+			$scope.currentQuestionIndex = 0;
+		}
 	};
-
-	/**
-	 * Listen clicks on `Redeem a code`.
-	 */
-	$('#redeem-code').click(function() {
-		var inputId = $(this).data('input-id'),
-			code = $('#' + inputId).val();
-
-		if (PRICES[code] !== undefined) {
-			showMessage('Congrats, you won ' + PRICES[code], 'success');
-		} else if (code === '') {
-			showMessage('You must type in a code!');
-		} else {
-			showMessage('Congrats, you won an incredible pair of NOTHING');
-		}
-	});
-
-	/**
-	 * Listen clicks on `continue` questionnaire buttons.
-	 */
-	$('#questionnaire .questionnaire-btn').click(function() {
-		var questionId = $(this).data('question-id'),
-			clickedValue = $(this).data('value');
-
-		if (QUESTIONNAIRE_ANSWERS[questionId] === clickedValue) {
-			showNextQuestion();
-			$('.' + questionId + ' button').prop('disabled', 'disabled');
-		} else {
-			showMessage('Wrong answer, you must start all over again.');
-			resetQuestionnaire();
-		}
-	});
-})();
+}

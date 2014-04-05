@@ -2,11 +2,7 @@ img {
 	max-width: 100%;
 }
 
-.questionnaire-btn {
-	margin: 0 10px 10px 0;
-}
-
-#code-input {
+input[type="text"] {
 	font-size: 1.2em;
 	height: auto;
 	max-width: 260px;
@@ -14,21 +10,25 @@ img {
 	text-align: center;
 }
 
-.code-messages-wrapper {
+ol {
+	margin: 20px 0;
+}
+
+ol .btn {
+	margin: 0 10px 10px 0;
+}
+
+.messages-wrapper {
 	height: 60px;
 	position: relative;
 }
 
-.code-messages-wrapper > .alert {
+.messages-wrapper > .alert {
 	line-height: 1em;
 	position: absolute;
 	top: 0;
 	left: 0;
 	right: 0;
-}
-
-#questionnaire ol {
-	margin: 20px 0;
 }
 
 .question {
@@ -41,7 +41,7 @@ img {
 	padding: 0;
 }
 
-#price {
+.well {
 	text-align: center;
 }
 
