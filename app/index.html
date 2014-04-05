@@ -54,11 +54,28 @@
 						<button class="btn btn-warning" ng-click="checkQuestion('hylia', 2)" ng-disabled="currentQuestionIndex > 2">Hylia</button>
 					</p>
 				</li>
+				<li ng-show="currentQuestionIndex > 2" class="question">
+					<p><strong>In Dragon Ball Z, how many wishes can you ask Namek Dragon after summoning him?</strong></p>
+					<p>
+						<button class="btn btn-warning" ng-click="checkQuestion('1', 3)" ng-disabled="currentQuestionIndex > 3">1</button>
+						<button class="btn btn-warning" ng-click="checkQuestion('3', 3)" ng-disabled="currentQuestionIndex > 3">3</button>
+						<button class="btn btn-warning" ng-click="checkQuestion('no-dragon', 3)" ng-disabled="currentQuestionIndex > 3">There is no Dragon in Namek</button>
+					</p>
+				</li>
+				<li ng-show="currentQuestionIndex > 3" class="question">
+					<p><strong>What are the names of the two Hobbits that joing Frodo and Sam at the beginning of their adventure in "The Lord of the Rings: The Fellowship of the Ring"?</strong></p>
+					<p>
+						<button class="btn btn-warning" ng-click="checkQuestion('bilbo-smeagol', 4)" ng-disabled="currentQuestionIndex > 4">Bilbo and Smeagol</button>
+						<button class="btn btn-warning" ng-click="checkQuestion('merry-pippin', 4)" ng-disabled="currentQuestionIndex > 4">Merry and Pippin</button>
+						<button class="btn btn-warning" ng-click="checkQuestion('legolas-gimli', 4)" ng-disabled="currentQuestionIndex > 4">Legolas and Gimli</button>
+					</p>
+				</li>
 			</ol>
 		</div>
 
-		<div ng-show="currentQuestionIndex > 2" class="well">
-			<h2>Congratulations! you reached the end of your adventure. Here's your price:</h2>
+		<div ng-show="currentQuestionIndex > 4" class="well">
+			<h2>Congratulations! You reached the end of your adventure.</h2>
+			<h3>This is your price.</h3>
 			<p><img src="images/mirror.jpg" alt=""/></p>
 			<h3><a href="http://www.ikea.com/gb/en/catalog/products/30217499/#/20243837">See it on Ikea's website</a></h3>
 		</div>

@@ -6,7 +6,9 @@ stoLat.factory('Data', function() {
 		questionnaireAnswers: {
 			0: 'darth-vader',
 			1: 'shot-in-the-head',
-			2: 'kokiri'
+			2: 'kokiri',
+			3: '1',
+			4: 'merry-pippin'
 		}
 	}
 });
@@ -16,7 +18,6 @@ function StoLatCtrl($scope, $timeout, Data) {
 	$scope.codeCorrect = false;
 	$scope.showPrice = false;
 	$scope.currentQuestionIndex = 0;
-	$scope.maxQuestionIndex = 2;
 
 	/**
 	 * Show a bootstrap message for 3 seconds with a provided status.
