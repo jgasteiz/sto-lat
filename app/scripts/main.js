@@ -2,7 +2,7 @@ var stoLat = angular.module('stoLat', []);
 
 stoLat.factory('Data', function() {
 	return {
-		correctCode: 'JaviIsTheBest',
+		correctCode: 'StoLatMadzia',
 		questionnaireAnswers: {
 			0: 'darth-vader',
 			1: 'shot-in-the-head',
@@ -18,11 +18,12 @@ function StoLatCtrl($scope, $timeout, Data) {
 	$scope.currentQuestionIndex = 0;
 	$scope.maxQuestionIndex = 2;
 
-	var clearMessages = function() {
-		$scope.message = '';
-		$scope.messageClass = '';
-	};
-
+	/**
+	 * Show a bootstrap message for 3 seconds with a provided status.
+	 *
+	 * @param message
+	 * @param status
+	 */
 	var showMessage = function(message, status) {
 		$scope.message = message;
 		$scope.messageClass = 'alert alert-' + status;
@@ -30,6 +31,17 @@ function StoLatCtrl($scope, $timeout, Data) {
 		$scope.timer = $timeout(clearMessages, 3000);
 	};
 
+	/**
+	 * Clean the messages.
+	 */
+	var clearMessages = function() {
+		$scope.message = '';
+		$scope.messageClass = '';
+	};
+
+	/**
+	 * Check provided code. If correct, show the questionnaire.
+	 */
 	$scope.checkCode = function() {
 		if ($scope.code === $scope.data.correctCode) {
 			showMessage('Congratulations! You won a price.', 'success');
@@ -40,6 +52,12 @@ function StoLatCtrl($scope, $timeout, Data) {
 		}
 	};
 
+	/**
+	 * Check if provided answer is correct. If it's correct, increments `currentQuestionIndex`.
+	 *
+	 * @param answer
+	 * @param questionId
+	 */
 	$scope.checkQuestion = function(answer, questionId) {
 		if (answer === $scope.data.questionnaireAnswers[questionId]) {
 			$scope.currentQuestionIndex = $scope.currentQuestionIndex + 1;
